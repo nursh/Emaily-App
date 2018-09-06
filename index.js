@@ -1,10 +1,22 @@
 const express = require('express');
-const app = express();
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+require('dotenv').config();
 const PORT = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
-  res.send({ greeting: 'Hi there!' });
-});
+
+const app = express();
+const googleCredentials = {
+  clientID: process.env.googleClientID,
+  clientSecret: process.env.googleClientSecret,
+  callbackURL: '/auth/google/callback',
+}
+const googleCallback = (accessToken) => {
+  console.log(accessToken)
+}
+passport.use(new GoogleStrategy(googleCredentials, googleCallback));
+
+
 
 app.listen(PORT);
 
