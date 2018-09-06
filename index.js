@@ -3,7 +3,7 @@ require('./services/passport'); // we are not exporting anything, just need exec
 
 const PORT = process.env.PORT || 5000;  
 const app = express();
-require('.routes/authRoutes')(app); // getting function export that requires app as argument
+require('./routes/authRoutes')(app); // getting function export that requires app as argument
 
 
 
