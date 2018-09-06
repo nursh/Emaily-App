@@ -1,10 +1,11 @@
 const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 5000;
+require('./services/passport'); // we are not exporting anything, just need execution
 
-app.get('/', (req, res) => {
-  res.send({ greeting: 'Hi there!' });
-});
+const PORT = process.env.PORT || 5000;  
+const app = express();
+require('./routes/authRoutes')(app); // getting function export that requires app as argument
+
+
+
 
 app.listen(PORT);
-

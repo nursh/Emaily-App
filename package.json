@@ -1,5 +1,5 @@
 {
-  "name": "Emaily-App",
+  "name": "emaily-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,18 @@
     "npm": "6.2.0"
   },
   "scripts": {
-    "start": "node index"
+    "start": "nodemon index"
   },
   "keywords": [],
   "author": "nur-sh",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.18.4"
   }
 }
