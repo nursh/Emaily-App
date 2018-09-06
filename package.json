@@ -8,7 +8,7 @@
     "npm": "6.2.0"
   },
   "scripts": {
-    "start": "node index"
+    "start": "nodemon index"
   },
   "keywords": [],
   "author": "nur-sh",
@@ -19,6 +19,7 @@
     "passport-google-oauth20": "^1.0.0"
   },
   "devDependencies": {
-    "dotenv": "^6.0.0"
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.18.4"
   }
 }
