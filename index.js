@@ -1,9 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const ms = require('ms');
+const passport = require('passport');
 
 const PORT = process.env.PORT || 5000;  
 const app = express();
 
+
+app.use(cookieSession({
+  maxAge: ms('30 days'),
+  keys: [process.env.cookieKey],
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 require('./models/User');
 require('./services/passport'); // we are not exporting anything, just need execution
