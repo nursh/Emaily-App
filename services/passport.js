@@ -7,6 +7,14 @@ require('dotenv').config();
 const User = mongoose.model('users'); 
 // Don't require models/User.js because it will be loaded in multiple times: best practise
 
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => done(null, user));
+})
+
 const googleCredentials = {
   clientID: process.env.googleClientID,
   clientSecret: process.env.googleClientSecret,
@@ -21,7 +29,8 @@ const googleCallback = (accessToken, refreshToken, profile, done) => {
       } else {
         new User({ googleId: profile.id })
           .save()
-          .then(user => done(null, user));
+          .then(user => done(null, user))
+          .catch(err => console.error(err));
       }
     }).catch(err => console.error(err))
 
