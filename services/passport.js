@@ -23,14 +23,12 @@ const googleCredentials = {
 };
 
 const googleCallback = async (accessToken, refreshToken, profile, done) => {
-  const user = await User.findOne({ googleId: profile.id })
-  if (user) {
-    done(null, user);
-  } else {
-    const user = await new User({ googleId: profile.id }).save()
-    done(null, user)
-  }
-
+  const existingUser = await User.findOne({ googleId: profile.id })
+  if (existingUser) {
+    return done(null, existingUser);
+  } 
+  const user = await new User({ googleId: profile.id }).save()
+  done(null, user);
 };
 
 passport.use(new GoogleStrategy(googleCredentials, googleCallback));
