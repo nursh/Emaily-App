@@ -32,9 +32,7 @@ class Header extends Component {
             Emaily
           </a>
           <ul className="right">
-            <li>
-              <a href="">{this.renderContent()}</a>
-            </li>
+            {this.renderContent()}
           </ul>
         </div>
       </nav>
