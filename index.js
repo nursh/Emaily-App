@@ -19,6 +19,6 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(process.env.mongoURI);
+mongoose.connect(process.env.mongoURI, {useNewUrlParser: true});
 require('./routes/authRoutes')(app); // getting function export that requires app as argument
 app.listen(PORT);
