@@ -12,7 +12,7 @@ const app = express();
 require('./models/User');
 require('./services/passport'); // we are not exporting anything, just need execution
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieSession({
   maxAge: ms('2 days'),
