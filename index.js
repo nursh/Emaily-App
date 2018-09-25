@@ -10,6 +10,7 @@ const app = express();
 
 
 require('./models/User');
+require('./models/Survey');
 require('./services/passport'); // we are not exporting anything, just need execution
 
 app.use(bodyParser.urlencoded({ extended: false }));
