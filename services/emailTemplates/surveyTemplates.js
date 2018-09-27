@@ -17,3 +17,5 @@ module.exports = ({ body }) => {
     </html>  
   `;
 }
+
+// The links for the yes and no should point to your app domain
