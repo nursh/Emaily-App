@@ -7,8 +7,13 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplates');
 const Survey = mongoose.model('surveys');
 
 module.exports = (app) => {
+
+  app.get('/api/surveys/feedback', (req, res) => res.send('Thank you for your feedback!!!'));
+
   app.post('/api/surveys', requireLogin, requireCredit, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
+
+    // You could add a url link to take the users to some page after a survey
     const survey = new Survey({
       title,
       subject,
