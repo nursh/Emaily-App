@@ -5,7 +5,7 @@ class Mailer extends helper.Mail {
   constructor({ subject, recipients }, content) {
     super();
 
-    this.sgAPI = process.env.sendGridKey;
+    this.sgAPI = sendgrid(process.env.sendGridKey);
     this.from_email = new helper.Email('no-reply@emaily.com');
     this.subject = subject;
     this.body = new helper.Content('text/html', content);
@@ -26,7 +26,7 @@ class Mailer extends helper.Mail {
     const trackingSettings = new helper.TrackingSettings();
     const clickTracking = new helper.ClickTracking(true, true);
 
-    trackingSettings.addClickTracking(clickTracking);
+    trackingSettings.setClickTracking(clickTracking);
     this.addTrackingSettings(trackingSettings);
   }
 
@@ -42,7 +42,7 @@ class Mailer extends helper.Mail {
       path: '/v3/mail/send',
       body: this.toJSON(),
     });
-    const response = this.sgAPI.API(request);
+    const response = await this.sgAPI.API(request);
     return response;
   }
 }
