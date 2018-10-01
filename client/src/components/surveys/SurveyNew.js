@@ -9,11 +9,17 @@ class SurveyNew extends Component {
   }
 
   renderContent() {
-    if (this.state.showReview) return <SurveyReview />
+    if (this.state.showReview) return (
+      <SurveyReview
+        onCancel={() => this.setState({ showReview: false })}
+      />
+    );
 
-    return <SurveyForm
+    return (
+      <SurveyForm
         onSurveySubmit={() => this.setState({ showReview: true })}
-      />;
+      />
+    );
   }
 
   render() {
