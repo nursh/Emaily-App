@@ -39,7 +39,6 @@ class SurveyForm extends Component {
   render() {
     return (
       <div>
-        SurveyForm
         <form
           onSubmit={this.props.handleSubmit((values) => console.log(values))}
         >
@@ -57,6 +56,18 @@ class SurveyForm extends Component {
   }
 }
 
+
+function validate(values) {
+  const errors = {};
+
+  if (!values.title) {
+    errors.title = 'You must provide a title';
+  }
+  
+  return errors;
+}
+
 export default reduxForm({
+  validate,
   form: 'surveyForm',
 })(SurveyForm);
