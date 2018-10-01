@@ -60,10 +60,14 @@ class SurveyForm extends Component {
 function validate(values) {
   const errors = {};
 
-  if (!values.title) {
-    errors.title = 'You must provide a title';
-  }
-  
+  _.each(FIELDS, ({ name }) => {
+    if (!values[name]) {
+      errors[name] = 'You must provide a value';
+      // You could alternatively add an error field in the FIELDS object
+      // for custom error messages
+    }
+  });
+
   return errors;
 }
 
