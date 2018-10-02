@@ -1,4 +1,4 @@
-module.exports = ({ body }) => {
+module.exports = ({ body, id }) => {
   return `
     <html>
       <body>
@@ -7,10 +7,10 @@ module.exports = ({ body }) => {
           <p>Please answer the following survey for better service</p>
           <p>${body}</p>
           <div>
-            <a href="http://localhost:3000/api/surveys/feedback">Yes</a>
+            <a href="http://localhost:3000/api/surveys/${id}/yes">Yes</a>
           </div>
           <div>
-            <a href="http://localhost:3000/api/surveys/feedback">No</a>
+            <a href="http://localhost:3000/api/surveys/${id}/no">No</a>
           </div>
         </div>
       </body>
