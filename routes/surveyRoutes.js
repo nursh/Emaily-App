@@ -10,6 +10,11 @@ module.exports = (app) => {
 
   app.get('/api/surveys/feedback', (req, res) => res.send('Thank you for your feedback!!!'));
 
+  app.post('/api/surveys/webhook', (req, res) => {
+    console.log(req.body);
+    res.send({});
+  });
+
   app.post('/api/surveys', requireLogin, requireCredit, async (req, res) => {
     const { title, subject, body, recipients } = req.body;
 
