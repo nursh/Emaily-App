@@ -11,7 +11,7 @@ const Survey = mongoose.model('surveys');
 
 module.exports = (app) => {
 
-  app.get('/api/surveys/feedback', (req, res) => res.send('Thank you for your feedback!!!'));
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => res.send('Thank you for your feedback!!!'));
 
   app.post('/api/surveys/webhook', (req, res) => {
     const p = new Path('/api/surveys/:surveyId/:choice');
@@ -30,9 +30,20 @@ module.exports = (app) => {
       })
       .compact()
       .uniqBy('email', 'surveyId')
+      .each(({ email, surveyId, choice }) => {
+        Survey.updateOne({
+          _id: surveyId,
+          recipients: {
+            $elemMatch: { email, responded: false },
+          },
+        }, {
+          $inc: { [choice]: 1 },
+          $set: { 'recipients.$.responded': true },
+          lastResponded: new Date(),
+        }).exec();
+      })
       .value();
 
-    console.log(events);
     res.send({});
   });
 
