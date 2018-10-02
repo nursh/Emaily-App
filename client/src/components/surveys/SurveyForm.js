@@ -5,29 +5,12 @@ import _ from 'lodash';
 import validateEmails from '../../utils/validateEmails';
 
 import SurveyField from './SurveyField';
+import formFields from './formFields';
 
-const FIELDS = [
-  {
-    label: 'Survey Title',
-    name: 'title',
-  },
-  {
-    label: 'Subject Line',
-    name: 'subject',
-  },
-  {
-    label: 'Email Body',
-    name: 'body',
-  },
-  {
-    label: 'Recipient List',
-    name: 'emails',
-  }
-]
 class SurveyForm extends Component {
 
   renderField = () => {
-    return _.map(FIELDS, ({ label, name }) => (
+    return _.map(formFields, ({ label, name }) => (
       <Field
         type="text"
         label={label}
@@ -62,10 +45,10 @@ class SurveyForm extends Component {
 function validate(values) {
   const errors = {};
   errors.emails = validateEmails(values.emails || '');
-  _.each(FIELDS, ({ name }) => {
+  _.each(formFields, ({ name }) => {
     if (!values[name]) {
       errors[name] = 'You must provide a value';
-      // You could alternatively add an error field in the FIELDS object
+      // You could alternatively add an error field in the formFields object
       // for custom error messages
     }
   });
